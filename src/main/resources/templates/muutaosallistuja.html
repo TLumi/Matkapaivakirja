@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<head>
+
+    <title>Muuta matkaa</title>
+   
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Muuta osallistujan tietoja</h1>
+
+		<form th:object="${osallistuja}" th:action="@{../saveOsallistuja}" action="#" method="post">
+			<input type="hidden" th:field="*{id}" class="form-control"/>
+			<input type="text" th:field="*{etunimi}" />
+			<input type="text" th:field="*{sukunimi}" />
+			<input type="text" th:field="*{lempinimi}" />
+			
+			
+			<input type="submit"  class="btn btn-primary"  value="Tallenna"></input>
+			
+		</form>
+	
+</body>
+</html>

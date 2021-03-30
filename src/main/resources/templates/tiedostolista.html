@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<h1>Tiedostot</h1>
+<table>
+<tr>
+<th>Nimi</th>
+<th>Tyyppi</th>
+</tr>
+<tr th:each = "tiedosto : ${tiedostot}">
+<td th:text="${tiedosto.nimi}"></td>
+<td th:text="${tiedosto.tyyppi}"></td>
+<td><a th:href= "@{/tiedosto/{id}(id=${tiedosto.tiedostoId})}" >Lataa kuva</a></td>
+</tr>
+</table>
+<a href="/">Valitse uusi kuva</a>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<head>
+    <title>Uusi osallistuja</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää uusi osallistuja</h1>
+	<div> 
+
+		<form th:object="${osallistuja}" th:action="@{saveOsallistuja}" action="#" method="post">
+		  	<label for="etunimi" >Etunimi</label>
+			<input type="text"id="etunimi" th:field="*{etunimi}" />
+		  	<label for="sukunimi">Sukunimi</label>
+			<input type="text" id="sukunimi" th:field="*{sukunimi}" />
+			<label for="lempinimi">Lempinimi</label>
+			<input type="text" id="lempinimi" th:field="*{lempinimi}" />
+		  	
+		  	
+			<input type="submit" class="btn btn-primary" value="Tallenna"></input>
+						
+		</form>
+	</div>
+</body>
+</html>

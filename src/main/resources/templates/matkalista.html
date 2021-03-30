@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" 
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+<head>
+	<title>Matkat</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h3 > Tällä sivulla voit valita minkä matkan tietoja haluat tarkastella. Voit myös lisätä uuden matkan tiedot.</h3>
+
+	 <a class="btn btn-success"  href="/lisaa">Lisää uusi matka</a>  
+	 <a class="btn btn-success"  href="/osallistujalista">Osallistujatietojen hallinta</a> 
+	  <a class="btn btn-success"  href="/kulkuvalinelista">Kulkuvälinetietojen hallinta</a> 
+	
+	  <table class="table table-striped">
+		<tr>
+		    <th>Päivä</th>
+		    <th>Kuvaus</th>
+		     <th>Sää</th>
+		     <th>Matka </th>
+		     <th>Osallistuja <th>
+		     <th>Kulkuväline</th>
+		     <th>Matkakuvaus</th>
+		     <th>Näytä</th>
+		     <th>Poista</th>
+		     <th>Muokkaa</th>      
+		</tr>  
+		<tr th:each = "matka :${matkat}">
+    		<td th:text="${matka.paiva}"></td>
+    		<td th:text="${matka.kuvaus}"></td>
+    		<td th:text="${matka.saa}"></td>
+    		<td th:text="${matka.km}"></td>
+			<td th:text="${matka.osallistuja.lempinimi}"></td>
+    		<td th:text="${matka.kulkuvaline.kulkuneuvo}"></td>
+    		<td th:text="${matka.matkakuvaus}"></td>
+    	
+    		
+    			<td><a class="btn btn-success" th:href="@{/nayta/{id}(id=${matka.id})}">Näytä matkan tiedot</a></td>  
+ 				<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${matka.id})}">Poista</a></td>
+ 				<td><a class="btn btn-success" th:href="@{/edit/{id}(id=${matka.id})}">Muuta tietoja</a></td>  
+ 				   		
+    	</tr>
+     </table>
+</body>
+</html>

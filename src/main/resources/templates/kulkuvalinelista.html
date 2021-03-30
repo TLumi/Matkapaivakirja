@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<head>
+    <title>Kulkuvaline</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+ <a class="btn btn-success"  href="/matkalista">Matkatiedot</a> 
+	  <a class="btn btn-success"  href="/osallistujalista">Osallistujatietojen hallinta</a> 
+<table>
+	<tr>
+		<th>Kulkuväline</th>
+		<th>Lisätiedot</th>
+	</tr>
+	<tr th:each = "kulkuvaline : ${kulkuvalineet}">
+		<td th:text="${kulkuvaline.kulkuneuvo}"></td>
+		<td th:text="${kulkuvaline.lisatiedot}"></td>
+		<td><a class="btn btn-danger" th:href="@{/deletekulkuvaline/{id}(id=${kulkuvaline.kulkuvalineId})}">Poista</a></td>
+ 		<td><a class="btn btn-success" th:href="@{/editkulkuvaline/{id}(id=${kulkuvaline.kulkuvalineId})}">Muuta tietoja</a></td>   	
+		 		
+	</tr>
+</table>
+ <a class="btn btn-success"  href="/lisaakulkuvaline">Lisää Kulkuvaline</a>  
+ 	
+
+
+</body>
+</html>

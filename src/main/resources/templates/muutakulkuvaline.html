@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<head>
+
+    <title>Muuta kulkuvälinettä</title>
+   
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Muuta kulkuvälineen tietoja</h1>
+
+		<form th:object="${kulkuvaline}" th:action="@{../savekulkuvaline}" action="#" method="post">
+			<input type="hidden" th:field="*{kulkuvalineId}" class="form-control"/>
+			<input type="text" th:field="*{kulkuneuvo}" />
+			<input type="text" th:field="*{lisatiedot}" />
+		
+			
+			<input type="submit"  class="btn btn-primary"  value="Tallenna"></input>
+			
+		</form>
+	
+</body>
+</html>

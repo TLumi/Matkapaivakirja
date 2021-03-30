@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<head>
+
+    <title>Muuta matkaa</title>
+   
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Muuta matkan tietoja</h1>
+
+		<form th:object="${matka}" th:action="@{../save}" action="#" method="post">
+			<input type="hidden" th:field="*{id}" class="form-control"/>
+			<input type="text" th:field="*{paiva}" />
+			<input type="text" th:field="*{kuvaus}" />
+			<input type="text" th:field="*{saa}" />
+			<input type="text" th:field="*{km}" />
+			<select id= "osallistujalista" th:field="*{osallistuja}" class="form-control">
+				<option th:each= "osallistuja: ${osallistujat}" th:value="${osallistuja.id}" th:text="${osallistuja.lempinimi}"></option>
+		   	</select>
+			<select id= "kulkuvalinelista" th:field="*{kulkuvaline}" class="form-control">
+				<option th:each= "kulkuvaline: ${kulkuvalineet}" th:value="${kulkuvaline.kulkuvalineId}" th:text="${kulkuvaline.kulkuneuvo}"></option>
+		   	</select>
+			<input type="text" th:field="*{matkakuvaus}" />
+			
+			<input type="submit"  class="btn btn-primary"  value="Tallenna"></input>
+			
+		</form>
+	
+</body>
+</html>

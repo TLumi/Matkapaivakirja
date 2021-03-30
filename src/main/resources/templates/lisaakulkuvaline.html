@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää uusi kulkuväline</h1>
+	<div> 
+
+		<form th:object="${kulkuvaline}" th:action="@{savekulkuvaline}" action="#" method="post">
+		  	<label for="kulkuneuvo">Kulkuväline</label>
+			<input type="text" id="kulkuneuvo" th:field="*{kulkuneuvo}" />
+		  	<label for="lisatiedot">Lisätiedot</label>
+			<input type="text" id="lisatiedot" th:field="*{lisatiedot}" />
+			
+		  	
+		  	
+			<input type="submit" class="btn btn-primary" value="Tallenna"></input>
+			
+						
+		</form>
+	</div>
+</body>
+</html>

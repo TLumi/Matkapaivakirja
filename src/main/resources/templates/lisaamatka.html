@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<head>
+    <title>Uusi matka</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää uusi matka</h1>
+	<div> 
+
+		<form th:object="${matka}" th:action="@{save}" action="#" method="post">
+		  	<label for="paiva" >Päivämäärä</label>
+			<input type="text"id="paiva" th:field="*{paiva}" />
+		  	<label for="kuvaus">Kuvaus</label>
+			<input type="text" id="kuvaus" th:field="*{kuvaus}" />
+			<label for="saa">Sää</label>
+			<input type="text" id="saa" th:field="*{saa}" />
+		  	<label for="km">Matkan pituus</label>
+			<input type="text" id="km" th:field="*{km}" />
+			<label for = "osallistujalista">Osallistuja</label> 
+				<select id= "osallistujalista" th:field="*{osallistuja}"class="col-form-label">
+					<option th:each= "osallistuja: ${osallistujat}" th:value="${osallistuja.id}" th:text="${osallistuja.lempinimi}"></option>
+				</select>
+			<label for = "kulkuvalinelista">Kulkuväline</label> 
+				<select id= "kulkuvalinelista" th:field="*{kulkuvaline}"class="col-form-label">
+					<option th:each= "kulkuvaline: ${kulkuvalineet}" th:value="${kulkuvaline.kulkuvalineId}" th:text="${kulkuvaline.kulkuneuvo}"></option>
+		   		</select>
+		   	<label for="matkakuvaus" >Matkakuvaus</label>
+			<input type="text"id="matkakuvaus" th:field="*{matkakuvaus}" />
+		  	
+			<input type="submit" class="btn btn-primary" value="Tallenna"></input>
+						
+		</form>
+	</div>
+</body>
+</html>
