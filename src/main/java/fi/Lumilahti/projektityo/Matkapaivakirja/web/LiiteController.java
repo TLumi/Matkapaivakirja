@@ -32,22 +32,22 @@ public class LiiteController {
 	 @Value("${upload.path}")
 	    private String uploadFolder;
 	    
-	    @GetMapping("/")
+	    @GetMapping("/lataaliite")
 	    public String index() {
 	        return "lataa";
 	    }
 
 	    @PostMapping("/lataa")
-	    public String fileUpload(@RequestParam("file") MultipartFile file, Model model) {
-	    	// Image Base64.getEncoder().encodeToString(file.file)
-	    	// <img  th:src="@{'data:image/jpeg;base64,'+${file.file}}" />
-	        if (file.isEmpty()) {
-	        	model.addAttribute("msg", "Upload failed");
-	            return "uploadstatus";
+	    public String LataaTiedosto(@RequestParam("tiedosto") MultipartFile tiedosto, Model model) {
+	    	
+	        if (tiedosto.isEmpty()) {
+	        	model.addAttribute("viesti", "Lataus epäonnistui");
+	            return "lataustilanne";
 	        }
 
 	        try {
-	            TiedostoModel tiedostoModel = new TiedostoModel(file.getOriginalFilename(), file.getContentType(), file.getBytes());
+	        	byte[] bytes = tiedosto.getBytes();
+	            TiedostoModel tiedostoModel = new TiedostoModel(tiedosto.getOriginalFilename(), tiedosto.getContentType(), bytes);
 	            tmrepository.save(tiedostoModel);
 	    
 	            return "redirect:/tiedostot";
@@ -55,24 +55,24 @@ public class LiiteController {
 	            e.printStackTrace();
 	        }
 
-	        return "uploadstatus";
+	        return "tiedostolista";
 	    }
 	    
 	    @GetMapping("/tiedostot")
-	    public String fileList(Model model) {
-	    	model.addAttribute("files", tmrepository.findAll());  	
+	    public String tiedostoLista(Model model) {
+	    	model.addAttribute("tiedostot", tmrepository.findAll());  	
 	    	return "tiedostolista";
 	    }
 	    
 		@GetMapping("/tiedosto/{id}")
-		public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
+		public ResponseEntity<byte[]> getTiedosto(@PathVariable Long id) {
 			Optional<TiedostoModel> fileOptional = tmrepository.findById(id);
 			
 			if(fileOptional.isPresent()) {
-				TiedostoModel file = fileOptional.get();
+				TiedostoModel tiedosto = fileOptional.get();
 				return ResponseEntity.ok()
-						.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFileName() + "\"")
-						.body(file.getFile());	
+						.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + tiedosto.getFileName() + "\"")
+						.body(tiedosto.getTiedosto());	
 			}
 			
 			return ResponseEntity.status(404).body(null);

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
+<head>
+    <title>Tiedostot</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
 <h1>Tiedostot</h1>
 <table>
 <tr>
@@ -13,7 +17,7 @@
 <td><a th:href= "@{/tiedosto/{id}(id=${tiedosto.tiedostoId})}" >Lataa kuva</a></td>
 </tr>
 </table>
-<a href="/">Valitse uusi kuva</a>
+<a href="/lataaliite">Valitse uusi kuva</a>
 
 </body>
 </html>

@@ -18,18 +18,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class TiedostoModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	private String fileName, mimeType;
 
 	@Lob
-	private byte[] file;
+	private byte[] tiedosto;
 	
 	public TiedostoModel() {}
 	
-	public TiedostoModel(String fileName, String mimeType, byte[] file) {
+	public TiedostoModel(String fileName, String mimeType, byte[] tiedosto) {
 		this.fileName = fileName;
 		this.mimeType = mimeType;
-		this.file = file;
+		this.tiedosto = tiedosto;
 	}
 
 	public long getId() {
@@ -56,12 +56,12 @@ public class TiedostoModel {
 		this.mimeType = mimeType;
 	}
 
-	public byte[] getFile() {
-		return file;
+	public byte[] getTiedosto() {
+		return tiedosto;
 	}
 
-	public void setFile(byte[] file) {
-		this.file = file;
+	public void setTiedosto(byte[] tiedosto) {
+		this.tiedosto = tiedosto;
 	}
 
 

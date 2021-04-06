@@ -61,8 +61,8 @@ public class MatkapaivakirjaApplication {
 				System.out.println(matka.toString());
 			}
 			
-			User user1 = new User("user", "$2a$10$eBe.euY5ukBOCZY1g5psEuXC3hfOith5ksx41lWTn9l.Faq1xBQCu", "USER");
-			User user2 = new User("admin", "$2a$10$S5JgORJQ9HE/lfsIypI8E.677KVfSJ.trviQ.ktL4licqvkJGEeUu", "ADMIN");
+			User user1 = new User("user", "$2a$10$crc625f8IgRI62PCVDL7gOmG69x8JVGi1.TiDlOrIgs00RHVD2yYi", "USER");
+			User user2 = new User("admin", "$2a$10$fgVgXxpIXdXpsZ6Fo4NiEOIu0/.aNC4z1Ej2xa1P8eUiQiGEBw6CO", "ADMIN");
 			urepository.save(user1);
 			urepository.save(user2);
 		};
