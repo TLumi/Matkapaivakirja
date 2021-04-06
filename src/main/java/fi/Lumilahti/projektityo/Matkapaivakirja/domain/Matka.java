@@ -16,7 +16,8 @@ public class Matka {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String paiva, kuvaus, matkakuvaus, saa, km;
+	private String paiva, kuvaus;
+	private String matkakuvaus, saa, km;
 	
 
 	@ManyToOne

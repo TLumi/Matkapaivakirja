@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet"  />
 <head>
 
     <title>Muuta matkaa</title>
@@ -10,14 +10,37 @@
 <body>
 	<h1>Muuta osallistujan tietoja</h1>
 
-		<form th:object="${osallistuja}" th:action="@{../saveOsallistuja}" action="#" method="post">
-			<input type="hidden" th:field="*{id}" class="form-control"/>
-			<input type="text" th:field="*{etunimi}" />
-			<input type="text" th:field="*{sukunimi}" />
-			<input type="text" th:field="*{lempinimi}" />
+		<form th:object="${osallistuja}" th:action="@{../savemuutettuOsallistuja}" action="#" method="post">
 			
 			
-			<input type="submit"  class="btn btn-primary"  value="Tallenna"></input>
+				<table>
+				
+			<tr>
+		
+				<td><input type="hidden" th:field="*{id}" class="form-control"/></td>
+				
+			<tr>
+			
+				<td>Etunimi:</td>
+				<td><input type="text" th:field="*{etunimi}" /></td>
+				<td th:if="${#fields.hasErrors('etunimi')}" th:errors="*{etunimi}">Etunimi Error</td>
+			</tr>
+			<tr>
+				<td>Sukunimi:</td>
+				<td><input type="text" th:field="*{sukunimi}" /></td>
+				<td th:if="${#fields.hasErrors('sukunimi')}" th:errors="*{sukunimi}">Sukunimi Error</td>
+			</tr>
+			<tr>
+				<td>Lempinimi:</td>
+				<td><input type="text" th:field="*{lempinimi}" /></td>
+				<td th:if="${#fields.hasErrors('lempinimi')}" th:errors="*{lempinimi}">Lempinimi Error</td>
+			</tr>
+			
+			<tr>
+				<td><button type="submit">Tallenna</button></td>
+			</tr>
+			</table>
+			
 			
 		</form>
 	

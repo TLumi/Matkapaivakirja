@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,60 +29,53 @@ public class LiiteController {
 	@Autowired
 	private TiedostoModelRepository tmrepository;
 
-	@Value("${upload.path}")
-    private String uploadFolder;
-    
-    @GetMapping("/")
-    public String index() {
-        return "lataa";
-    }
+	 @Value("${upload.path}")
+	    private String uploadFolder;
+	    
+	    @GetMapping("/")
+	    public String index() {
+	        return "lataa";
+	    }
 
-    @PostMapping("/lataa")
-    public String fileUpload(@RequestParam("tiedosto") MultipartFile tiedosto, Model model) {
-    																																								// Image Base64.getEncoder().encodeToString(file.file)
-    																																								// <img  th:src="@{'data:image/jpeg;base64,'+${file.file}}" />
-    	if (tiedosto.isEmpty()) {
-        	model.addAttribute("viesti", "Lataus epäonnistui");
-            return "lataustilanne";
-        }
+	    @PostMapping("/lataa")
+	    public String fileUpload(@RequestParam("file") MultipartFile file, Model model) {
+	    	// Image Base64.getEncoder().encodeToString(file.file)
+	    	// <img  th:src="@{'data:image/jpeg;base64,'+${file.file}}" />
+	        if (file.isEmpty()) {
+	        	model.addAttribute("msg", "Upload failed");
+	            return "uploadstatus";
+	        }
 
-        try {
-            
-            TiedostoModel tiedostoModel = new TiedostoModel (tiedosto.getOriginalFilename(), tiedosto.getContentType(), tiedosto.getBytes());
-            tmrepository.save(tiedostoModel);
-        	
-            return "redirect:/tiedostot";
-            
-        }catch (IOException e) {
-        	 e.printStackTrace();
-        }
-           return "lataustilanne";
-        }
-        
-    
-        
-    
-    @GetMapping("/tiedostot")
-    public String tiedostoLista(Model model) {
-    	model.addAttribute("tiedostot", tmrepository.findAll());
-    	return "tiedostolista";
-    	
-    }
-    
-    @GetMapping("/tiedosto/{id}")
-    public ResponseEntity<byte[]> getTiedosto(@PathVariable Long tiedostoId) {
-    	
-		Optional <TiedostoModel> tiedostoOptional = tmrepository.findById(tiedostoId);
-    	
-    	if(tiedostoOptional.isPresent()) {
-    		TiedostoModel tiedosto = tiedostoOptional.get();
-    		return ResponseEntity.ok()
-    				.header(HttpHeaders.CONTENT_DISPOSITION, "liite; nimi=\"" + tiedosto.getNimi() + "\"")
-    				.body(tiedosto.getTiedosto());
-    	}
-    		
-    		return ResponseEntity.status(404).body(null);
-    		
-    	
-    }
-}
+	        try {
+	            TiedostoModel tiedostoModel = new TiedostoModel(file.getOriginalFilename(), file.getContentType(), file.getBytes());
+	            tmrepository.save(tiedostoModel);
+	    
+	            return "redirect:/tiedostot";
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	        return "uploadstatus";
+	    }
+	    
+	    @GetMapping("/tiedostot")
+	    public String fileList(Model model) {
+	    	model.addAttribute("files", tmrepository.findAll());  	
+	    	return "tiedostolista";
+	    }
+	    
+		@GetMapping("/tiedosto/{id}")
+		public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
+			Optional<TiedostoModel> fileOptional = tmrepository.findById(id);
+			
+			if(fileOptional.isPresent()) {
+				TiedostoModel file = fileOptional.get();
+				return ResponseEntity.ok()
+						.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFileName() + "\"")
+						.body(file.getFile());	
+			}
+			
+			return ResponseEntity.status(404).body(null);
+		}    
+	    
+	}

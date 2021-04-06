@@ -16,6 +16,8 @@ import fi.Lumilahti.projektityo.Matkapaivakirja.domain.OsallistujaRepository;
 import fi.Lumilahti.projektityo.Matkapaivakirja.domain.Osallistuja;
 import fi.Lumilahti.projektityo.Matkapaivakirja.domain.TiedostoModel;
 import fi.Lumilahti.projektityo.Matkapaivakirja.domain.TiedostoModelRepository;
+import fi.Lumilahti.projektityo.Matkapaivakirja.domain.User;
+import fi.Lumilahti.projektityo.Matkapaivakirja.domain.UserRepository;
 
 
 
@@ -30,16 +32,16 @@ public class MatkapaivakirjaApplication {
 		SpringApplication.run(MatkapaivakirjaApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner MatkaDemo(MatkaRepository repository, KulkuvalineRepository krepository, OsallistujaRepository orepository, TiedostoModelRepository tmrepository) {
+	public CommandLineRunner MatkaDemo(MatkaRepository repository, KulkuvalineRepository krepository, OsallistujaRepository orepository, TiedostoModelRepository tmrepository, UserRepository urepository) {
 		return (args) -> {
 			log.info("save matkat");
 			
 			krepository.save(new Kulkuvaline("Auto", "keltainen"));
 			krepository.save(new Kulkuvaline("Polkupyörä", "Jopo"));
-//			
+			
 			orepository.save(new Osallistuja ("Tuula", "Lumilahti", "TL"));
 			orepository.save(new Osallistuja ("Tiina", "Testi", "Tikru"));
-//			
+			
 			System.out.println("tallenna matkat kantaan");
 			repository.save(new Matka("21.2.2021", "Automatka Helsingistä Lappeenrantaan",  "Hieno päivä ja reissu Lappeenrantaan", "aurinkoa", "230", orepository.findByEtunimiAndSukunimiAndLempinimi("Tuula", "Lumilahti", "TL").get(0), krepository.findByKulkuneuvoAndLisatiedot("Auto", "keltainen") .get(0)));			
 			repository.save(new Matka("21.2.2021", "Helsingistä Tampereelle pyörällä",  "Hieno päivä ja hyvät huoltojoukot", "aurinkoa", "230", orepository.findByEtunimiAndSukunimiAndLempinimi("Tiina", "Testi", "Tikru").get(0), krepository.findByKulkuneuvoAndLisatiedot("Polkupyörä", "Jopo") .get(0)));			
@@ -58,7 +60,13 @@ public class MatkapaivakirjaApplication {
 			for (Matka matka : repository.findAll()){
 				System.out.println(matka.toString());
 			}
+			
+			User user1 = new User("user", "$2a$10$eBe.euY5ukBOCZY1g5psEuXC3hfOith5ksx41lWTn9l.Faq1xBQCu", "USER");
+			User user2 = new User("admin", "$2a$10$S5JgORJQ9HE/lfsIypI8E.677KVfSJ.trviQ.ktL4licqvkJGEeUu", "ADMIN");
+			urepository.save(user1);
+			urepository.save(user2);
 		};
+		
 		
 	}
 	

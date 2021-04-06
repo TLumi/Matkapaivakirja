@@ -3,6 +3,7 @@ package fi.Lumilahti.projektityo.Matkapaivakirja.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,13 +63,16 @@ public class MatkaController {
 	
 	//poista matka
 	@RequestMapping(value="/delete/{id}", method =RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteMatka(@PathVariable("id") Long matkaId, Model model) {
 		repository.deleteById(matkaId);
 		return "redirect:../matkalista";
 	}
 
+	
 	//muuta matkan tietoja
 	@RequestMapping(value="/edit/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addMatka(@PathVariable("id") Long matkaId, Model model) {
 		model.addAttribute("matka", repository.findById(matkaId));
 		model.addAttribute("kulkuvalineet", krepository.findAll());

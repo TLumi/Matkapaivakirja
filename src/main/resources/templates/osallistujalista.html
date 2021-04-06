@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet"  />
 <head>
     <title>Osallistujalista</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -9,7 +9,7 @@
 <body>
 
 	 <a class="btn btn-success"  href="/matkalista">Matkatiedot</a> 
-	  <a class="btn btn-success"  href="/kulkuvalinelista">Kulkuvälinetietojen hallinta</a> 
+	  <a class="btn btn-success"  href="/kulkuvalinelista">Kulkuvälineet</a> 
 
 <table>
 	<tr>
@@ -21,13 +21,14 @@
 		<td th:text="${osallistuja.etunimi}"></td>
 		<td th:text="${osallistuja.sukunimi}"></td>
 		<td th:text="${osallistuja.lempinimi}"></td>
-		<td><a class="btn btn-danger" th:href="@{/deleteosallistuja/{id}(id=${osallistuja.id})}">Poista</a></td>
- 		<td><a class="btn btn-success" th:href="@{/editosallistuja/{id}(id=${osallistuja.id})}">Muuta tietoja</a></td>   		
+	
+		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deleteosallistuja/{id}(id=${osallistuja.id})}">Poista</a></td>
+ 		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editosallistuja/{id}(id=${osallistuja.id})}">Muuta tietoja</a></td>   		
 	</tr>
 </table>
- <a class="btn btn-success"  href="/lisaaosallistuja">Lisää Osallistuja</a>  
- 
-
+ <a sec:authorize="hasAuthority('ADMIN')"   href="/lisaaosallistuja">Lisää osallistuja</a>  
+ <a th:href="@{/logout}">Logout</a>
+	
 
 </body>
 </html>

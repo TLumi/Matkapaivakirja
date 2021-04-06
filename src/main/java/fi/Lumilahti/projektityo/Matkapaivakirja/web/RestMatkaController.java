@@ -33,7 +33,7 @@ public class RestMatkaController {
 	//palauta kaikki matkat
 			
 	@RequestMapping(value="/matkat", method = RequestMethod.GET)
-	public @ResponseBody List<Matka> matkaListaRest() {	
+	public @ResponseBody List<Matka> matkaListRest() {	
 	        return (List<Matka>) repository.findAll();
 	    } 
 	
@@ -41,14 +41,14 @@ public class RestMatkaController {
 	//palauttaa kaikki osallistujat
 	
 	@RequestMapping(value="/osallistujat", method = RequestMethod.GET)
-	public @ResponseBody List<Osallistuja> osallistujaListaRest() {	
+	public @ResponseBody List<Osallistuja> osallistujaListRest() {	
 	        return (List<Osallistuja>) orepository.findAll();
 	    } 
 
 	// palauttaa kulkuvälineet
 	
 	@RequestMapping(value="/kulkuvalineet", method = RequestMethod.GET)
-	public @ResponseBody List<Kulkuvaline> kulkuvalineListaRest() {	
+	public @ResponseBody List<Kulkuvaline> kulkuvalineListRest() {	
 	        return (List<Kulkuvaline>) krepository.findAll();
 	    } 
 	
@@ -61,7 +61,7 @@ public class RestMatkaController {
 	    } 
 	
 	
-	@RequestMapping(value="/osallistuja/{osallistujaId}", method = RequestMethod.GET)
+	@RequestMapping(value="/osallistuja/{id}", method = RequestMethod.GET)
 	public @ResponseBody Optional<Osallistuja> findOsallistujaRest(@PathVariable("id") Long osallistujaId) {	
         return orepository.findById(osallistujaId);
 	    } 

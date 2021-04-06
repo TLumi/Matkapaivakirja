@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet"  />
 <head>
 
     <title>Muuta kulkuvälinettä</title>
@@ -10,13 +10,13 @@
 <body>
 	<h1>Muuta kulkuvälineen tietoja</h1>
 
-		<form th:object="${kulkuvaline}" th:action="@{../savekulkuvaline}" action="#" method="post">
+		<form th:object="${kulkuvaline}" th:action="@{../saveKulkuvaline}" action="#" method="post">
 			<input type="hidden" th:field="*{kulkuvalineId}" class="form-control"/>
 			<input type="text" th:field="*{kulkuneuvo}" />
 			<input type="text" th:field="*{lisatiedot}" />
 		
 			
-			<input type="submit"  class="btn btn-primary"  value="Tallenna"></input>
+			<input type="submit"  value="Tallenna"></input>
 			
 		</form>
 	

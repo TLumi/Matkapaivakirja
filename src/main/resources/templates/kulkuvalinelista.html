@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet" />
 <head>
     <title>Kulkuvaline</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -9,7 +9,7 @@
 <body>
 
  <a class="btn btn-success"  href="/matkalista">Matkatiedot</a> 
-	  <a class="btn btn-success"  href="/osallistujalista">Osallistujatietojen hallinta</a> 
+	  <a class="btn btn-success"  href="/osallistujalista">Osallistujatiedot</a> 
 <table>
 	<tr>
 		<th>Kulkuväline</th>
@@ -18,12 +18,13 @@
 	<tr th:each = "kulkuvaline : ${kulkuvalineet}">
 		<td th:text="${kulkuvaline.kulkuneuvo}"></td>
 		<td th:text="${kulkuvaline.lisatiedot}"></td>
-		<td><a class="btn btn-danger" th:href="@{/deletekulkuvaline/{id}(id=${kulkuvaline.kulkuvalineId})}">Poista</a></td>
- 		<td><a class="btn btn-success" th:href="@{/editkulkuvaline/{id}(id=${kulkuvaline.kulkuvalineId})}">Muuta tietoja</a></td>   	
+		<td sec:authorize="hasAuthority('ADMIN')"><a  th:href="@{/deletekulkuvaline/{id}(id=${kulkuvaline.kulkuvalineId})}">Poista</a></td>
+ 		<td sec:authorize="hasAuthority('ADMIN')"><a  th:href="@{/editkulkuvaline/{id}(id=${kulkuvaline.kulkuvalineId})}">Muuta tietoja</a></td>   	
 		 		
 	</tr>
 </table>
- <a class="btn btn-success"  href="/lisaakulkuvaline">Lisää Kulkuvaline</a>  
+ <a sec:authorize="hasAuthority('ADMIN')"   href="/lisaakulkuvaline">Lisää Kulkuvaline</a>  
+ <a th:href="@{/logout}">Logout</a>
  	
 
 

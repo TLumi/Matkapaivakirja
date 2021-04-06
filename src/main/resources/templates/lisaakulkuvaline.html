@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet"  />
 <head>
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -8,18 +8,24 @@
 <body>
 	<h1>Lisää uusi kulkuväline</h1>
 	<div> 
-
-		<form th:object="${kulkuvaline}" th:action="@{savekulkuvaline}" action="#" method="post">
-		  	<label for="kulkuneuvo">Kulkuväline</label>
-			<input type="text" id="kulkuneuvo" th:field="*{kulkuneuvo}" />
-		  	<label for="lisatiedot">Lisätiedot</label>
-			<input type="text" id="lisatiedot" th:field="*{lisatiedot}" />
-			
-		  	
-		  	
-			<input type="submit" class="btn btn-primary" value="Tallenna"></input>
-			
+	<form th:object="${kulkuvaline}" th:action="@{saveKulkuvaline}" action="#" method="post">
+		  	<table>
+			<tr>
+				<td>Kulkuväline:</td>
+				<td><input type="text" th:field="*{kulkuneuvo}" /></td>
+				<td th:if="${#fields.hasErrors('kulkuneuvo')}" th:errors="*{kulkuneuvo}">KulkuVäline Error</td>
+			</tr>
+			<tr>
+				<td>Lisätiedot:</td>
+				<td><input type="text" th:field="*{lisatiedot}" /></td>
+				
+			</tr>
 						
+			<tr>
+				<td><button type="submit">Lisää</button></td>
+			</tr>
+			</table>
+			
 		</form>
 	</div>
 </body>

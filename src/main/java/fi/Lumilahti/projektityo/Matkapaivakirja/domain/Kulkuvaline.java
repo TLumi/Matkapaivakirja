@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,7 +18,9 @@ public class Kulkuvaline {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long kulkuvalineId;
-	private String kulkuneuvo, lisatiedot;
+	@Size(min=2, max=30)
+	private String kulkuneuvo; 
+	private String lisatiedot;
 	
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy= "kulkuvaline")

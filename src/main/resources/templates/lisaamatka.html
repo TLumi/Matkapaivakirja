@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet"  />
 <head>
     <title>Uusi matka</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -19,17 +19,17 @@
 		  	<label for="km">Matkan pituus</label>
 			<input type="text" id="km" th:field="*{km}" />
 			<label for = "osallistujalista">Osallistuja</label> 
-				<select id= "osallistujalista" th:field="*{osallistuja}"class="col-form-label">
+				<select id= "osallistujalista" th:field="*{osallistuja}">
 					<option th:each= "osallistuja: ${osallistujat}" th:value="${osallistuja.id}" th:text="${osallistuja.lempinimi}"></option>
 				</select>
 			<label for = "kulkuvalinelista">Kulkuväline</label> 
-				<select id= "kulkuvalinelista" th:field="*{kulkuvaline}"class="col-form-label">
+				<select id= "kulkuvalinelista" th:field="*{kulkuvaline}">
 					<option th:each= "kulkuvaline: ${kulkuvalineet}" th:value="${kulkuvaline.kulkuvalineId}" th:text="${kulkuvaline.kulkuneuvo}"></option>
 		   		</select>
 		   	<label for="matkakuvaus" >Matkakuvaus</label>
 			<input type="text"id="matkakuvaus" th:field="*{matkakuvaus}" />
 		  	
-			<input type="submit" class="btn btn-primary" value="Tallenna"></input>
+			<input type="submit"  value="Tallenna"></input>
 						
 		</form>
 	</div>

@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet"  />
 <head>
     <title>Uusi osallistuja</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -10,16 +10,28 @@
 	<div> 
 
 		<form th:object="${osallistuja}" th:action="@{saveOsallistuja}" action="#" method="post">
-		  	<label for="etunimi" >Etunimi</label>
-			<input type="text"id="etunimi" th:field="*{etunimi}" />
-		  	<label for="sukunimi">Sukunimi</label>
-			<input type="text" id="sukunimi" th:field="*{sukunimi}" />
-			<label for="lempinimi">Lempinimi</label>
-			<input type="text" id="lempinimi" th:field="*{lempinimi}" />
-		  	
-		  	
-			<input type="submit" class="btn btn-primary" value="Tallenna"></input>
-						
+		  	<table>
+			<tr>
+				<td>Etunimi:</td>
+				<td><input type="text" th:field="*{etunimi}" /></td>
+				<td th:if="${#fields.hasErrors('etunimi')}" th:errors="*{etunimi}">Etunimi Error</td>
+			</tr>
+			<tr>
+				<td>Sukunimi:</td>
+				<td><input type="text" th:field="*{sukunimi}" /></td>
+				<td th:if="${#fields.hasErrors('sukunimi')}" th:errors="*{sukunimi}">Sukunimi Error</td>
+			</tr>
+			<tr>
+				<td>Lempinimi:</td>
+				<td><input type="text" th:field="*{lempinimi}" /></td>
+				<td th:if="${#fields.hasErrors('lempinimi')}" th:errors="*{lempinimi}">Lempinimi Error</td>
+			</tr>
+			
+			<tr>
+				<td><button type="submit">Lisää</button></td>
+			</tr>
+			</table>
+			
 		</form>
 	</div>
 </body>

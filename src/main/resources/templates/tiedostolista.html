@@ -8,8 +8,8 @@
 <th>Tyyppi</th>
 </tr>
 <tr th:each = "tiedosto : ${tiedostot}">
-<td th:text="${tiedosto.nimi}"></td>
-<td th:text="${tiedosto.tyyppi}"></td>
+<td th:text="${tiedosto.fileName}"></td>
+<td th:text="${tiedosto.mimeType}"></td>
 <td><a th:href= "@{/tiedosto/{id}(id=${tiedosto.tiedostoId})}" >Lataa kuva</a></td>
 </tr>
 </table>

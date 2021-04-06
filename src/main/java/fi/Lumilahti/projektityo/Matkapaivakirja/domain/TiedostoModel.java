@@ -17,85 +17,52 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class TiedostoModel {
 	@Id
-	@GeneratedValue(strategy =GenerationType.AUTO)
-	private long tiedostoId;
-	private String nimi, tyyppi;
-	
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	private String fileName, mimeType;
+
 	@Lob
-	private byte [] tiedosto;
+	private byte[] file;
 	
-
-	@JsonIgnore
-	@OneToMany(cascade =CascadeType.ALL, mappedBy= "tiedostoModel") 
-	private List<Matka> matkat;
-
-	public TiedostoModel(String nimi, String tyyppi, byte[] tiedosto) {
-		this.nimi = nimi;
-		this.tyyppi = tyyppi;
-		this.tiedosto = tiedosto;
-	}
+	public TiedostoModel() {}
 	
-	public TiedostoModel(String nimi, String tyyppi) {
-		this.nimi = nimi;
-		this.tyyppi = tyyppi;}
-		
-
-	public TiedostoModel() {
-			
-	}
-	
-	public TiedostoModel(String nimi, List<Matka> matkat) {
-		this.nimi = nimi;
+	public TiedostoModel(String fileName, String mimeType, byte[] file) {
+		this.fileName = fileName;
+		this.mimeType = mimeType;
+		this.file = file;
 	}
 
-	public long getTiedostoId() {
-		return tiedostoId;
+	public long getId() {
+		return id;
 	}
 
-	public void setTiedostoId(long tiedostoId) {
-		this.tiedostoId = tiedostoId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public String getNimi() {
-		return nimi;
+	public String getFileName() {
+		return fileName;
 	}
 
-	public void setNimi(String nimi) {
-		this.nimi = nimi;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
-	public String getTyyppi() {
-		return tyyppi;
+	public String getMimeType() {
+		return mimeType;
 	}
 
-	public void setTyyppi(String tyyppi) {
-		this.tyyppi = tyyppi;
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
 	}
 
-	public byte[] getTiedosto() {
-		return tiedosto;
+	public byte[] getFile() {
+		return file;
 	}
 
-	public void setTiedosto(byte[] tiedosto) {
-		this.tiedosto = tiedosto;
-	}
-	
-	public List<Matka> getMatkat() {
-		return matkat;
+	public void setFile(byte[] file) {
+		this.file = file;
 	}
 
-	public void setMatkat(List<Matka> matkat) {
-		this.matkat = matkat;
-	}
-
-	@Override
-	public String toString() {
-		return "TiedostoModel [tiedostoId=" + tiedostoId + ", nimi=" + nimi + ", tyyppi=" + tyyppi + ", tiedosto="
-				+ Arrays.toString(tiedosto) + "]";
-	}
-	
-	
-	
-	
 
 }
