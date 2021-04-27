@@ -23,6 +23,11 @@ public class KulkuvalineController {
 	@Autowired
 	private KulkuvalineRepository krepository;
 	
+	@RequestMapping(value = { "/kulkuvaline"  })
+	public String kulkuvalineList() {
+		return "kulkuvalinelista";
+	}
+	
 	@RequestMapping(value= {"/kulkuvalinelista"})
 	public String kulkuvalineLista(Model model) {
 		model.addAttribute("kulkuvalineet", krepository.findAll());

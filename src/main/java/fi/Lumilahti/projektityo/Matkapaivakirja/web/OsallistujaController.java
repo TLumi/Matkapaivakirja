@@ -28,6 +28,11 @@ public class OsallistujaController {
 	public void naytaOsallistujat() {
 		List<Osallistuja> osallistujat =orepository.findByLempinimi("");
 	}
+	
+	@RequestMapping(value = { "/osallistuja"  })
+	public String osallistujaList() {
+		return "osallistujalista";
+	}
 
 	@RequestMapping(value= {"/osallistujalista"})
 	public String osallistujaList(Model model) {

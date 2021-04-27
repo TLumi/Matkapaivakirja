@@ -16,13 +16,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
-import fi.Lumilahti.projektityo.Matkapaivakirja.web.MatkaController;
+import fi.Lumilahti.projektityo.Matkapaivakirja.web.OsallistujaController;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 
-public class MatkaControllerTest {
+public class OsallistujaControllerTest {
 
 	
 	@Autowired
@@ -30,14 +30,14 @@ public class MatkaControllerTest {
 	
 	@Before
 	public void setup() {
-		this.mockMvc = MockMvcBuilders.standaloneSetup(new MatkaController()).build();
+		this.mockMvc = MockMvcBuilders.standaloneSetup(new OsallistujaController()).build();
 	}
 		
 	@Test
-	public void testMatkalistaPage() throws Exception {
-		this.mockMvc.perform(get("/"))
+	public void testOsallistujaPage() throws Exception {
+		this.mockMvc.perform(get("/osallistuja"))
 		.andExpect(status().isOk())
-		.andExpect(view().name("matkalista"))
+		.andExpect(view().name("osallistujalista"))
 		.andDo(MockMvcResultHandlers.print())
 		.andReturn();
 	}

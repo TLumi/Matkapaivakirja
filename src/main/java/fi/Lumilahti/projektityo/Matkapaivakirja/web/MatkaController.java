@@ -36,9 +36,14 @@ public class MatkaController {
 	public void naytaMatkat() {
 		List<Matka> matkat = repository.findByKuvaus("");
 	}
+	@RequestMapping(value = { "/"  })
+	public String matkaList() {
+		return "matkalista";
+	}
+	
 	
 	// Näytä matkalista ja valintaruutu
-	@RequestMapping(value= {"/ ", "/matkalista"})
+	@RequestMapping(value= { "/matkalista"})
 	public String matkaLista(Model model) {
 		model.addAttribute("matkat", repository.findAll());
 		return "matkalista";

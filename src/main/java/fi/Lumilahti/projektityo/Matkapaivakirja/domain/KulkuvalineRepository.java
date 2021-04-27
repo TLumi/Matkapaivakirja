@@ -9,4 +9,5 @@ public interface KulkuvalineRepository  extends CrudRepository <Kulkuvaline, Lon
 	List <Kulkuvaline> findByKulkuneuvo(String kulkuneuvo); 
 	List <Kulkuvaline> findByKulkuneuvoAndLisatiedot(String kulkuneuvo, String lisatiedot); 
 	Optional <Kulkuvaline> findById(Long id);
+	List <Kulkuvaline> findByLisatiedot(String lisatiedot);
 }
